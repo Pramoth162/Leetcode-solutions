@@ -3,10 +3,9 @@ public:
     int search(vector<int>& nums, int target) {
         int n=nums.size();
         int h=n-1,l=0;
-        int ans=-1;
         while(l<=h)
         {
-            int m=(l+h)/2;
+            int m=l+(h-l)/2;
             if(nums[m]==target)
             return m;
             else if(nums[m]>=nums[l])
@@ -24,6 +23,6 @@ public:
                  h=m-1;
             }
         }
-        return ans;
+        return -1;
     }
 };
