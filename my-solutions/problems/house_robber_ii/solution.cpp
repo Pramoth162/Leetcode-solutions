@@ -19,9 +19,9 @@ public:
             dp1[i]=max(dp1[i-1],dp1[i-2]+nums[i]);
         }
         for(int i=3;i<n;i++)
-        dp2[i]=max(dp2[i-1],dp2[i-2]+nums[i]);
-
+        {
+            dp2[i]=max(dp2[i-1],dp2[i-2]+nums[i]);
+        }
         return max(dp1[n-2],dp2[n-1]);
-        
     }
 };
