@@ -1,45 +1,23 @@
 class Solution {
 public:
-    int orangesRotting(vector<std::vector<int>>& grid) {
-        int rows = grid.size();
-        int cols = grid[0].size();
-        int minutes = 0;
-        
-        while (true) {
-            vector<pair<int, int>> toRot;
-            
-            for (int r = 0; r < rows; ++r) {
-                for (int c = 0; c < cols; ++c) {
-                    if (grid[r][c] == 1) {
-                        if ((r > 0 && grid[r - 1][c] == 2) ||
-                            (r < rows - 1 && grid[r + 1][c] == 2) ||
-                            (c > 0 && grid[r][c - 1] == 2) ||
-                            (c < cols - 1 && grid[r][c + 1] == 2)) {
-                            toRot.push_back({r, c});
-                        }
-                    }
+    int orangesRotting(vector<vector<int>>& grid) {
+        int n=grid.size(),m=grid[0].size(),ans=0;
+        while(1){
+            vector<pair<int,int>> v;
+            for(int i=0;i<n;i++){
+                for(int j=0;j<m;j++){
+                    if(grid[i][j]!=1) continue;
+                    if(i&&grid[i-1][j]==2||i<n-1&&grid[i+1][j]==2||j&&grid[i][j-1]==2||j<m-1&&grid[i][j+1]==2)
+                        v.push_back({i,j});
                 }
             }
-            
-            if (toRot.empty()) {
-                break;
-            }
-            
-            for (auto& p : toRot) {
-                grid[p.first][p.second] = 2;
-            }
-            
-            minutes++;
+            if(v.empty()) break;
+            for(auto p:v) grid[p.first][p.second]=2;
+            ans++;
         }
-        
-        for (int r = 0; r < rows; ++r) {
-            for (int c = 0; c < cols; ++c) {
-                if (grid[r][c] == 1) {
-                    return -1;
-                }
-            }
-        }
-        
-        return minutes;
+        for(auto &r:grid)
+            for(int x:r)
+                if(x==1) return -1;
+        return ans;
     }
 };
