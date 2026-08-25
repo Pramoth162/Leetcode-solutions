@@ -1,9 +1,12 @@
-
 name: Sync Leetcode
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * 6"
+    
+permissions:
+  contents: write # Forces GitHub to let the script save your files!
+
 jobs:
   build:
     runs-on: ubuntu-latest
